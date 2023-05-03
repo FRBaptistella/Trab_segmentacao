@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+import java.util.Collections;
+void setup() {
+  size(640, 480);
+  noLoop();
+}
+
+void draw() {
+  PImage aux = loadImage("FINAL3.jpg");
+  PImage aux2 = createImage(aux.width, aux.height, RGB);
+//PImage não deixa passar de 255, por isso a matriz de float - as imagens são iguais
+
+ // Filtro de Mediana
+  for (int y = 0; y < aux.height; y++) {
+    for (int x = 0; x < aux.width; x++) {
+      int jan = 1;
+      int pos = y*aux.width + x;
+      ArrayList<Integer> valores = new ArrayList();
+
+      // Percorrer a janela
+      for (int i = jan*(-1); i <= jan; i++) {
+        for (int j = jan*(-1); j <= jan; j++) {
+          int ny = y+i;
+          int nx = x+j;
+          if (ny >= 0 && ny < aux.height &&
+            nx >= 0 && nx < aux.width) {
+            int pos_aux = ny * aux.width + nx;
+            valores.add((int)(red(aux.pixels[pos_aux])));
+          }
+        }
+      }
+      // Calculo da Mediana
+      Collections.sort(valores);
+      aux.pixels[pos]=color(valores.get(valores.size()/2));
+          }
+  }
+  
+
+    
+ 
+
+
+  image(aux, 0, 0);
+  //save("imgGerada.jpg");
+  //save("imgGerada2.jpg");
+  save("imgGerada21.jpg");
+}

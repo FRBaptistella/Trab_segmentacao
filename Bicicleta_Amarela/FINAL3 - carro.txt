@@ -1,0 +1,57 @@
+void setup() {
+  size(640,480);
+  noLoop();
+}
+
+void draw (){
+ PImage img = loadImage ("c.jpg");
+ PImage img2 =  createImage (img.width, img.height, RGB);
+ 
+ for(int y = 0; y < img.height; y++){
+   for (int x = 0; x < img.width; x++){
+     int pos = y *img.width + x;
+     int media = (int) (red(img.pixels[pos]) + green(img.pixels[pos]) + blue(img.pixels[pos])) / 3;
+     
+     //img2.pixels[pos] = color(red(img.pixels[pos]));
+     img2.pixels[pos] = color(media);
+}  
+}
+
+////Filtro de Brilho
+//  for(int y = 0; y < img.height; y++){
+//   for (int x = 0; x < img.width; x++){
+//     int pos = y *img.width + x;
+//     int brilho = (int)green(img2.pixels[pos]) + 10;
+//     if (brilho > 150) brilho = 0;
+//     else if (brilho < 150 && brilho >80) brilho = 100;
+//     else if (brilho <50) brilho = 200;
+//     else if (brilho < 80 && brilho >50) brilho = 255;
+//     //if (brilho ==100) brilho = 0;
+//     img2.pixels[pos] = color(brilho);
+     
+//   }
+//  }
+//Filtro de Limiarização
+   for(int y = 0; y < img.height; y++){
+   for (int x = 0; x < img.width; x++){
+     int pos = y *img.width + x;
+     if (red(img2.pixels[pos]) > 50 && y > 130 && y < 460 && x >115) 
+
+       img2.pixels[pos] = color(255);
+       else
+         img2.pixels[pos] = color(0);
+   }
+   }
+
+image(img2,0,0);
+//save("PBMedia.jpg");
+//save("PBblue.jpg");
+//save("PBred.jpg");
+//save("PBgreen.jpg");
+//save("brilhoB.jpg");
+//save("limiB.jpg");
+//save("brilhoR.jpg");
+//save("limiR.jpg");
+save("FINAL3.jpg");
+
+}
